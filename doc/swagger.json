@@ -1,73 +1,88 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
-    "title": "API Car Binar",
-    "description": "API Car Binar",
-    "version": "1.0.1"
+    "title": "Challenge FSW 2 Chapter 5",
+    "description": "This is API for Challenge FSW 2 Chapter 5",
+    "version": "1.0.0"
   },
-  "basePath": "/api/v1",
-  "schemes": ["http"],
+  "tags": [
+    {
+      "name": "Users",
+      "description": "This is API for Users resources"
+    },
+    {
+      "name": "Cars",
+      "description": "This is API for Cars resources"
+    }
+  ],
+  "servers": [
+    {
+      "url": "http://localhost:3000/api/v1"
+    }
+  ],
   "paths": {
     "/user/register": {
       "post": {
+        "tags": ["Users"],
         "summary": "Register User",
-        "description": "Register User",
-        "tags": ["User"],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "User Object",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
+        "description": "API for register user",
+        "requestBody": {
+          "description": "Request body for register user",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
                 }
               }
             }
           }
-        ],
-        "produces": ["application/json"],
+        },
         "responses": {
           "201": {
             "description": "Created",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                },
-                "data": {
+            "content": {
+              "application/json": {
+                "schema": {
                   "type": "object",
                   "properties": {
-                    "name": {
+                    "status": {
                       "type": "string"
                     },
-                    "email": {
+                    "message": {
                       "type": "string"
                     },
-                    "password": {
-                      "type": "string"
-                    },
-                    "role": {
-                      "type": "string"
-                    },
-                    "updatedAt": {
-                      "type": "string"
-                    },
-                    "createdAt": {
-                      "type": "string"
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "password": {
+                          "type": "string"
+                        },
+                        "role": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
@@ -75,29 +90,37 @@
             }
           },
           "4xx": {
-            "description": "Client Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
           },
           "5xx": {
-            "description": "Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -107,46 +130,45 @@
     },
     "/user/login": {
       "post": {
+        "tags": ["Users"],
         "summary": "Login User",
-        "description": "Login User",
-        "tags": ["User"],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "User Object",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "email": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
+        "description": "API for login user",
+        "requestBody": {
+          "description": "Request body for login user",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
                 }
               }
             }
           }
-        ],
-        "produces": ["application/json"],
+        },
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                },
-                "data": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
                   "type": "object",
                   "properties": {
-                    "token": {
+                    "status": {
                       "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "token": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
@@ -154,29 +176,19 @@
             }
           },
           "4xx": {
-            "description": "Client Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "5xx": {
-            "description": "Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -186,46 +198,48 @@
     },
     "/user/check": {
       "get": {
-        "summary": "Check User",
-        "description": "Check User",
-        "tags": ["User"],
-        "parameters": [
+        "tags": ["Users"],
+        "security": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Token User",
-            "required": true,
-            "type": "string",
-            "example": "Bearer your-token-here"
+            "bearerToken": []
           }
         ],
-        "produces": ["application/json"],
+        "summary": "Check User",
+        "description": "API for check user",
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                },
-                "data": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "integer"
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
                     },
-                    "name": {
-                      "type": "string"
-                    },
-                    "email": {
-                      "type": "string"
-                    },
-                    "role": {
-                      "type": "string"
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "role": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
@@ -233,29 +247,37 @@
             }
           },
           "4xx": {
-            "description": "Client Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
           },
           "5xx": {
-            "description": "Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -265,75 +287,74 @@
     },
     "/user/add-admin": {
       "post": {
-        "summary": "Add admin (Only superadmin)",
-        "description": "Add admin",
-        "tags": ["User"],
-        "parameters": [
+        "tags": ["Users"],
+        "security": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Token User",
-            "required": true,
-            "type": "string",
-            "example": "Bearer your-token-here"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "User Object",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string"
-                },
-                "password": {
-                  "type": "string"
+            "bearerToken": []
+          }
+        ],
+        "summary": "Add Admin",
+        "description": "API for add admin",
+        "requestBody": {
+          "description": "Request body for add admin",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
                 }
               }
             }
           }
-        ],
-        "produces": ["application/json"],
+        },
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                },
-                "data": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "integer"
-                    },
-                    "name": {
+                    "status": {
                       "type": "string"
                     },
-                    "email": {
+                    "message": {
                       "type": "string"
                     },
-                    "password": {
-                      "type": "string"
-                    },
-                    "role": {
-                      "type": "string"
-                    },
-                    "updatedAt": {
-                      "type": "string"
-                    },
-                    "createdAt": {
-                      "type": "string"
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "password": {
+                          "type": "string"
+                        },
+                        "role": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
@@ -341,29 +362,16 @@
             }
           },
           "4xx": {
-            "description": "Client Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "5xx": {
-            "description": "Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -371,89 +379,96 @@
         }
       }
     },
-    "/car": {
+    "/cars": {
       "post": {
-        "summary": "Create Car (admin)",
-        "description": "Create Car",
-        "tags": ["Car"],
-        "parameters": [
+        "tags": ["Cars"],
+        "security": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Token User",
-            "required": true,
-            "type": "string",
-            "example": "Bearer your-token-here"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Car Object",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "price": {
-                  "type": "integer"
-                },
-                "year": {
-                  "type": "integer"
-                },
-                "category": {
-                  "type": "string"
+            "bearerToken": []
+          }
+        ],
+        "summary": "Create Car",
+        "description": "API for create car",
+        "requestBody": {
+          "description": "Request body for create car",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "integer"
+                  },
+                  "year": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
                 }
               }
             }
           }
-        ],
-        "produces": ["application/json"],
+        },
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                },
-                "data": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "integer"
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
                     },
-                    "name": {
-                      "type": "string"
-                    },
-                    "price": {
-                      "type": "integer"
-                    },
-                    "year": {
-                      "type": "integer"
-                    },
-                    "category": {
-                      "type": "string"
-                    },
-                    "createdBy": {
-                      "type": "string"
-                    },
-                    "updatedBy": {
-                      "type": "string"
-                    },
-                    "deletedBy": {
-                      "type": "string"
-                    },
-                    "createdAt": {
-                      "type": "string"
-                    },
-                    "updatedAt": {
-                      "type": "string"
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "type": "integer"
+                        },
+                        "year": {
+                          "type": "integer"
+                        },
+                        "category": {
+                          "type": "string"
+                        },
+                        "image": {
+                          "type": "string"
+                        },
+                        "cloudinary_id": {
+                          "type": "string"
+                        },
+                        "createdBy": {
+                          "type": "string"
+                        },
+                        "updatedBy": {
+                          "type": "string"
+                        },
+                        "deletedBy": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
@@ -461,29 +476,37 @@
             }
           },
           "4xx": {
-            "description": "Client Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
           },
           "5xx": {
-            "description": "Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -491,66 +514,70 @@
         }
       },
       "get": {
-        "summary": "Get All Car (admin)",
-        "description": "Get All Car",
-        "tags": ["Car"],
-        "parameters": [
+        "tags": ["Cars"],
+        "security": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Token User",
-            "required": true,
-            "type": "string",
-            "example": "Bearer your-token-here"
+            "bearerToken": []
           }
         ],
-        "produces": ["application/json"],
+        "summary": "Get All Cars",
+        "description": "API for get all cars",
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                },
-                "data": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "price": {
-                        "type": "integer"
-                      },
-                      "year": {
-                        "type": "integer"
-                      },
-                      "category": {
-                        "type": "string"
-                      },
-                      "createdBy": {
-                        "type": "string"
-                      },
-                      "updatedBy": {
-                        "type": "string"
-                      },
-                      "deletedBy": {
-                        "type": "string"
-                      },
-                      "createdAt": {
-                        "type": "string"
-                      },
-                      "updatedAt": {
-                        "type": "string"
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "integer"
+                          },
+                          "year": {
+                            "type": "integer"
+                          },
+                          "category": {
+                            "type": "string"
+                          },
+                          "image": {
+                            "type": "string"
+                          },
+                          "cloudinary_id": {
+                            "type": "string"
+                          },
+                          "createdBy": {
+                            "type": "string"
+                          },
+                          "updatedBy": {
+                            "type": "string"
+                          },
+                          "deletedBy": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          }
+                        }
                       }
                     }
                   }
@@ -559,119 +586,37 @@
             }
           },
           "4xx": {
-            "description": "Client Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "5xx": {
-            "description": "Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/car/list": {
-      "get": {
-        "summary": "Get All Car",
-        "description": "Get All Car",
-        "tags": ["Car"],
-        "produces": ["application/json"],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                },
-                "data": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "price": {
-                        "type": "integer"
-                      },
-                      "year": {
-                        "type": "integer"
-                      },
-                      "category": {
-                        "type": "string"
-                      },
-                      "createdBy": {
-                        "type": "string"
-                      },
-                      "updatedBy": {
-                        "type": "string"
-                      },
-                      "deletedBy": {
-                        "type": "string"
-                      },
-                      "createdAt": {
-                        "type": "string"
-                      },
-                      "updatedAt": {
-                        "type": "string"
-                      }
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
                     }
                   }
                 }
               }
             }
           },
-          "4xx": {
-            "description": "Client Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                }
-              }
-            }
-          },
           "5xx": {
-            "description": "Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -679,96 +624,106 @@
         }
       }
     },
-    "/car/{carId}": {
+    "/cars/{carId}": {
       "put": {
-        "summary": "Update Car (admin)",
-        "description": "Update Car",
-        "tags": ["Car"],
-        "parameters": [
+        "tags": ["Cars"],
+        "security": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Token User",
-            "required": true,
-            "type": "string",
-            "example": "Bearer your-token-here"
-          },
+            "bearerToken": []
+          }
+        ],
+        "summary": "Update Car",
+        "description": "API for update car",
+        "parameters": [
           {
             "name": "carId",
             "in": "path",
-            "description": "Car Id",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Car Object",
+            "description": "Car ID",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "price": {
-                  "type": "integer"
-                },
-                "year": {
-                  "type": "integer"
-                },
-                "category": {
-                  "type": "string"
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Request body for update car",
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "integer"
+                  },
+                  "year": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
                 }
               }
             }
           }
-        ],
-        "produces": ["application/json"],
+        },
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                },
-                "data": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "integer"
-                    },
-                    "name": {
+                    "status": {
                       "type": "string"
                     },
-                    "price": {
-                      "type": "integer"
-                    },
-                    "year": {
-                      "type": "integer"
-                    },
-                    "category": {
-                      "type": "string"
-                    },
-                    "createdBy": {
-                      "type": "string"
-                    },
-                    "updatedBy": {
-                      "type": "string"
-                    },
-                    "deletedBy": {
-                      "type": "string"
-                    },
-                    "createdAt": {
-                      "type": "string"
-                    },
-                    "updatedAt": {
-                      "type": "string"
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "type": "integer"
+                        },
+                        "year": {
+                          "type": "integer"
+                        },
+                        "category": {
+                          "type": "string"
+                        },
+                        "image": {
+                          "type": "string"
+                        },
+                        "cloudinary_id": {
+                          "type": "string"
+                        },
+                        "createdBy": {
+                          "type": "string"
+                        },
+                        "updatedBy": {
+                          "type": "string"
+                        },
+                        "deletedBy": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
@@ -776,29 +731,37 @@
             }
           },
           "4xx": {
-            "description": "Client Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
           },
           "5xx": {
-            "description": "Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
@@ -806,71 +769,77 @@
         }
       },
       "delete": {
-        "summary": "Delete Car (admin)",
-        "description": "Delete Car",
-        "tags": ["Car"],
-        "parameters": [
+        "tags": ["Cars"],
+        "security": [
           {
-            "name": "Authorization",
-            "in": "header",
-            "description": "Token User",
-            "required": true,
-            "type": "string",
-            "example": "Bearer your-token-here"
-          },
+            "bearerToken": []
+          }
+        ],
+        "summary": "Delete Car",
+        "description": "API for delete car",
+        "parameters": [
           {
             "name": "carId",
             "in": "path",
-            "description": "Car Id",
+            "description": "Car ID",
             "required": true,
-            "type": "integer"
+            "schema": {
+              "type": "integer"
+            }
           }
         ],
-        "produces": ["application/json"],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
-                },
-                "data": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "integer"
+                    "status": {
+                      "type": "string",
+                      "example": "Success"
                     },
-                    "name": {
-                      "type": "string"
-                    },
-                    "price": {
-                      "type": "integer"
-                    },
-                    "year": {
-                      "type": "integer"
-                    },
-                    "category": {
-                      "type": "string"
-                    },
-                    "createdBy": {
-                      "type": "string"
-                    },
-                    "updatedBy": {
-                      "type": "string"
-                    },
-                    "deletedBy": {
-                      "type": "string"
-                    },
-                    "createdAt": {
-                      "type": "string"
-                    },
-                    "updatedAt": {
-                      "type": "string"
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "type": "integer"
+                        },
+                        "year": {
+                          "type": "integer"
+                        },
+                        "category": {
+                          "type": "string"
+                        },
+                        "image": {
+                          "type": "string"
+                        },
+                        "cloudinary_id": {
+                          "type": "string"
+                        },
+                        "createdBy": {
+                          "type": "string"
+                        },
+                        "updatedBy": {
+                          "type": "string"
+                        },
+                        "deletedBy": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "updatedAt": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
@@ -878,34 +847,50 @@
             }
           },
           "4xx": {
-            "description": "Client Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
           },
           "5xx": {
-            "description": "Server Error",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string"
-                },
-                "message": {
-                  "type": "string"
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
           }
         }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerToken": {
+        "type": "http",
+        "scheme": "bearer"
       }
     }
   }

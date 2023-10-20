@@ -21,6 +21,12 @@ module.exports = {
       category: {
         type: Sequelize.STRING,
       },
+      image: {
+        type: Sequelize.TEXT,
+      },
+      cloudinary_id: {
+        type: Sequelize.STRING,
+      },
       createdBy: {
         type: Sequelize.STRING,
       },

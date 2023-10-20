@@ -1,11 +1,15 @@
 const { Car } = require("../models");
 const ApiError = require("../utils/error");
+const cloudinary = require("../config/cloudinary");
 
 const create = async (req, res, next) => {
   try {
     const { name: createdBy } = req.user;
+    const result = await cloudinary.uploader.upload(req.file.path);
     const car = await Car.create({
       ...req.body,
+      image: result.secure_url,
+      cloudinary_id: result.public_id,
       createdBy,
     });
     res.status(201).json({
@@ -23,8 +27,12 @@ const update = async (req, res) => {
     const { name: updatedBy } = req.user;
     const carId = req.params.carId;
     const car = await Car.findByPk(carId);
+    await cloudinary.uploader.destroy(car.cloudinary_id);
+    const result = await cloudinary.uploader.upload(req.file.path);
     await car.update({
       ...req.body,
+      image: result.secure_url,
+      cloudinary_id: result.public_id,
       updatedBy,
     });
     res.status(200).json({

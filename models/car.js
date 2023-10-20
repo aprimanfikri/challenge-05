@@ -26,6 +26,8 @@ module.exports = (sequelize, DataTypes) => {
       price: DataTypes.FLOAT,
       year: DataTypes.INTEGER,
       category: DataTypes.STRING,
+      image: DataTypes.TEXT,
+      cloudinary_id: DataTypes.STRING,
       createdBy: DataTypes.STRING,
       updatedBy: DataTypes.STRING,
       deletedBy: DataTypes.STRING,
