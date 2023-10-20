@@ -23,8 +23,8 @@ Before you start, make sure you have Node.js and npm (Node Package Manager) inst
 ### Clone the repository:
 
 ```shell
-git clone https://github.com/aprimanfikri/challenge-05.git
-cd challenge-05
+git clone https://github.com/aprimanfikri/challenge-05.git service-repository-pattern
+cd service-repository-pattern
 ```
 
 ### Install dependencies:
