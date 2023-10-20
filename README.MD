@@ -24,7 +24,7 @@ Before you start, make sure you have Node.js and npm (Node Package Manager) inst
 
 ```shell
 git clone https://github.com/aprimanfikri/challenge-05.git
-cd challenge-04
+cd challenge-05
 ```
 
 ### Install dependencies:
