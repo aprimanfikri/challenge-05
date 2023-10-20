@@ -1,13 +1,14 @@
-const { Car } = require("../models");
-const ApiError = require("../utils/error");
+const carService = require("../../../services/carService");
+const ApiError = require("../../../utils/error");
 
 const create = async (req, res, next) => {
   try {
     const { name: createdBy } = req.user;
-    const car = await Car.create({
+    const carData = {
       ...req.body,
       createdBy,
-    });
+    };
+    const car = await carService.createCar(carData);
     res.status(201).json({
       status: "success",
       message: "Car created successfully",
@@ -18,58 +19,45 @@ const create = async (req, res, next) => {
   }
 };
 
-const update = async (req, res) => {
+const update = async (req, res, next) => {
   try {
     const { name: updatedBy } = req.user;
     const carId = req.params.carId;
-    const car = await Car.findByPk(carId);
-    await car.update({
+    const car = await carService.getCarById(carId);
+    const carData = {
       ...req.body,
       updatedBy,
-    });
+    };
+    const updatedCar = await carService.updateCar(car, carData);
     res.status(200).json({
       status: "success",
       message: "Car updated successfully",
-      data: car,
+      data: updatedCar,
     });
   } catch (error) {
     return next(new ApiError(500, error.message));
   }
 };
 
-const remove = async (req, res) => {
+const remove = async (req, res, next) => {
   try {
     const { name: deletedBy } = req.user;
     const carId = req.params.carId;
-    const car = await Car.findByPk(carId);
-    await car.update({ deletedBy });
-    // await car.destroy();
+    const car = await carService.getCarById(carId);
+    const deletedCar = await carService.deleteCar(car, deletedBy);
     res.status(200).json({
       status: "success",
       message: "Car deleted successfully",
-      data: car,
+      data: deletedCar,
     });
   } catch (error) {
     return next(new ApiError(500, error.message));
   }
 };
 
-const get = async (req, res) => {
+const get = async (req, res, next) => {
   try {
-    const cars = await Car.findAll({
-      where: {
-        deletedBy: null,
-      },
-      attributes: {
-        exclude: [
-          "createdAt",
-          "updatedAt",
-          "deletedBy",
-          "createdBy",
-          "updatedBy",
-        ],
-      },
-    });
+    const cars = await carService.getAllCars();
     res.status(200).json({
       status: "success",
       message: "Cars retrieved successfully",
@@ -80,9 +68,9 @@ const get = async (req, res) => {
   }
 };
 
-const getAll = async (req, res) => {
+const getAll = async (req, res, next) => {
   try {
-    const cars = await Car.findAll();
+    const cars = await carService.getAllCarsWithDeleted();
     res.status(200).json({
       status: "success",
       message: "Cars retrieved successfully",
